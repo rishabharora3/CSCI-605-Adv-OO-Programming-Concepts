@@ -1,2 +1,2 @@
-# CSCI - 605 Java Assignments
+CSCI-605 - Adv OO Programming Concepts course
 
