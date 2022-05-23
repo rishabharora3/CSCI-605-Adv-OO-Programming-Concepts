@@ -1,0 +1,59 @@
+Java Homework 5.1
+Some points to note:
+  - class A is extended by B and class B is extended by C.
+As soon as program is executed, main function of class C is executed line by line.
+•	aC object is created using new() and it calls the constructor of C, which in turn calls the constructor of its parent class i.e B(), as it implicitly executes the super(); as the first line of any constructor. Hence, B() calls its parent class constructor A(). Constructor call of A() initializes aInstantInt = 1, it returns back to B() and now B() initializes aInstantInt  = 2. Now the call is returned to C() and it intilaizes aInstantInt  = 3.
+•	aB object is created using new() and it calls the constructor of B, which in turn calls the constructor of its parent class i.e A() , as it implicitly executes the super(); as the first line of any constructor. Constructor call of A() initializes aInstantInt = 1, it returns back to B() and now B() initializes aInstantInt  = 2.
+•	aA object is created using new() and it calls the constructor of A, which calls the constructor of object class which does nothing essentially. Constructor call of A() initializes instance variable aInstantInt = 1
+•	aB= (B) aC; => This line casts the object aC to type B and then assigns it to aB.
+•	aB.aInstanceSet(200), therefore calls the method of class C and sets instance variable of class C to 200.
+•	AA= (A) aB;=> This line casts the object aB to type A and then assigns it to aA. But we know that now aB is pointing to aC, hence, aA is pointing to aC.
+•	aA. aInstanceSet(100), therefore calls the method of class C and sets instance variable of class C to 100.
+•	print(“1: “);=> This calls the print function of class C(because of method overriding function of class C is called) only because function  which is static. After the displaying the location, aA is displayed which calls the overridden method of object class toString() which  calls the                                     aInstanceIntGet() function which returns the instance variable of class C. the result is conactenated with the string and is returned to the first call. Hence when aA, aB, and aC are printed in print statement, then only methofd of C is called and hence all of the three statements give same output which is shown below:
+                  1:
+                        C: 100
+                        C: 100
+                        C: 100
+•   For the rest of the output in 1st call of print function, the last three lines print the instance variables of each object, which is different in each case.
+                  1:
+                        C: 100
+                        C: 100
+                        C: 100
+                        1   // instance variable of aA
+                        2   // instance variable of aB
+                        100  /// instance variable of aC
+•   aA.aInstanceInt = 42; => This line sets the instance variable of aA to 42.
+•   aC.aInstanceInt = 44; => This line sets the instance variable of aC to 44.
+•   print(“2: “);=> This calls the print function of class C(because of method overriding function of class C is called) only function  which is static. After the displaying the location, aA is displayed which calls the overridden method of object class toString() which  calls the                                     aInstanceIntGet() function which returns the instance variable of class C. the result is conactenated with the string and is returned to the first call. Hence when aA, aB, and aC are printed in print statement, then only methofd of C is called and hence all of the three statements give same output which is shown below:
+                  2:
+                        C: 44
+                        C: 44
+                        C: 44
+•   For the rest of the output in 1st call of print function, the last three lines print the instance variables of each object, which is different in each case.
+                  2:
+                        C: 44
+                        C: 44
+                        C: 44
+                        42   // instance variable of aA
+                        2   // instance variable of aB
+                        44  /// instance variable of aC
+•   aB.InstanceInt = 43;=> This line sets the instance variable of aB to 43.
+•   print(“3: “);=> This calls the print function of class C(because of method overriding function of class C is called) only function  which is static. After the displaying the location, aA is displayed which calls the overridden method of object class toString() which  calls the                                     aInstanceIntGet() function which returns the instance variable of class C. the result is conactenated with the string and is returned to the first call. Hence when aA, aB, and aC are printed in print statement, then only methofd of C is called and hence all of the three statements give same output which is shown below:
+                  3:
+                        C: 44
+                        C: 44
+                        C: 44
+•   For the rest of the output in 1st call of print function, the last three lines print the instance variables of each object, which is different in each case.
+                  3:
+                        C: 44
+                        C: 44
+                        C: 44
+                        42   // instance variable of aA
+                        43   // instance variable of aB
+                        44  /// instance variable of aC
+
+
+
+
+
+

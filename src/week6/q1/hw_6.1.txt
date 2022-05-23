@@ -1,0 +1,8 @@
+Design implemented:
+
+Node (PARENT) -> (CHILD CLASSES) NodeString class, NodeInteger class, NodeLong class
+Each child node class adds and compares according to the data type.
+
+Abstract class BinaryTree (PARENT) -> (CHILD CLASS) SortedStorageSetWithNulls class
+class checks the data type and calls the method of Binary Tree such as add(), find() and delete()
+

@@ -1,0 +1,50 @@
+Q1. Why would the program not compile, if the line ’does not compile’ would be commented in?
+A1.
+A) Line 13 "return 3;" does not compile because it is unreachable. The try block of method noSystemExit() always
+throws an exception which results in the execution of the catch block. Due to the return statement in the catch
+block "return 0", jvm completes the finally block and returns to the caller of the method with value "0" returned in
+catch block.
+B) Line 24 "return 3;" if commented, the program will not compile because the function expects a return value of type
+int. In this case the execution goes from try block to finally block directly since no exception occurs and no return
+value present in try or finally block.
+C) Line 55 "return 3;" does not compile because it is unreachable. Since after array index out of bound exception
+in the try block, the control directly goes to the finally block which has a return value of 2,it does not execute any
+further lines in the function. The control is given back to the caller of the function with return value 2.
+
+Q2. Explain the execution of each method in writing.
+
+A2.
+A) Method noSystemExit():
+A private method with no parameters and expected return type of integer. In the try block, an exception is thrown always
+with message as "1" which will be caught by the catch block which is printing string "2" and a return value 0.
+The finally is executed before returning to the caller of the method and it prints "3 finally". Control again goes to
+the return value in the catch block and 0 is returned.
+
+B) Method noExeption():
+A private method with no parameters and expected return type of integer. There is no exception in this method, after
+execution of the try block with print statement "inside try: 1", control directly goes to the finally block which prints
+"inside finally: 3 ". The return statement at the of the function is executed and control is passed back to the caller
+with value 3.
+
+C) Method anExeption1():
+A private method with no parameters and expected return type of integer. anArray is defined & created with size 1 and
+in the try block we are trying to divide with a denominator 0 which will cause an ArithmeticException, control goes to
+the catch block in which we are trying to access the index 2 which will produce an IndexOutOfBoundsException which is not
+being caught. The control directly goes to the finally block and the print statement is printed "inside finally: 3 "
+and the return value 2 is returned to the caller.
+
+D) Method anExeption2():
+A private method with no parameters and expected return type of integer. anArray is defined & created with size 1 and
+in the try block we are trying to access the index 2 which will produce an IndexOutOfBoundsException which is not being
+caught. Control goes directly to finally block after try and the string "inside finally: 3 " is printed with return
+value 2.
+
+E) Method withSystemExit():
+A private method with no parameters and no expected return type. An exception is thrown in the try block which is caught
+by the catch block. "5" is printed and the program exits withe status 0 after this. Finally block and the print
+statement at the of the function never executes in this case.
+
+
+
+
+

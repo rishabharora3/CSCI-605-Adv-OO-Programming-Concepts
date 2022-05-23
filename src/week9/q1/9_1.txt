@@ -1,0 +1,91 @@
+﻿import java.util.Vector;
+import java.util.List;
+
+
+
+
+class MyStack<E> {
+    Vector<E> myStack = new Vector<E>();  // Declaring a vector myStack which accepts elements of type E.
+
+
+    public void push( E anElement ) // Defining a function push which adds the element of type E to the myStack.
+            myStack.add(anElement);  
+    }
+
+
+    public E pop() { // Defining a function pop() which removes the element from pop() after the checking the condition if stack isn’t already empty.
+
+
+        if ( ! myStack.isEmpty() )        {
+                E anElement = myStack.lastElement();
+                myStack.remove(myStack.size() - 1) ;
+                return anElement;
+        } else  {
+                return null;  // If the stack is empty, it returns null.
+        }
+    }
+    public boolean isEmpty()        { // Defining a function isEmpty() which checks if our stack is empty. It returns a boolean value.
+        return myStack.isEmpty();
+    }
+}
+
+
+interface I1                         { }  // defining an interface I1
+class A1                         { }  // defining a class A1
+class A2 extends A1                { } // defining a class A2 which extends A1
+class A3 extends A2                { } // defining a class A3 which extends A2
+class A4 extends A2 implements I1 { }  // defining class A4 which extends A2 and implements I1
+
+
+class GenericQ {  // defining an another class Generic
+
+
+    private static void m1(MyStack<? extends A3> aStack)  {        } // defining a function m1() which accepts arguments of type A3 or its subclasses.
+    private static void m2(MyStack<?> aStack)  {        }  // defining a function m2() which accepts arguments of any type.
+    private static void m3(MyStack<? super A3> aStack)  {        }. // // defining a function m3() which accepts arguments of type A3 or its superclasses.
+
+
+    public static void testMyStack()        {  //defining a function testMyStack() 
+        MyStack<Integer>          aMyStack = new MyStack<>();  // creating an object of class MyStack which only accepts Integer values.
+        Vector<MyStack<Integer>>  aVector  = new Vector<MyStack<Integer>>(); // creating a vector which only accepts values of type MyStack<Integer>.
+        MyStack<MyStack<Integer>> bMyStack = new MyStack<MyStack<Integer>>();  // creating an object of MyStack which accepts the value of type MyStack<Integer>
+        Vector<MyStack<MyStack<Integer>>>  
+                                  bVector  = new Vector<MyStack<MyStack<Integer>>>();  // creating a vector object which only accepts the value of MyStack<MyStack<Integer>> type.
+
+
+        MyStack<A1>                    aA1 = new MyStack<>();  // creates an object of MyStack which accepts the element of A1 type.
+        MyStack<A2>                    aA2 = new MyStack<>();  // creates an object of MyStack which accepts the element of A2 type.
+        MyStack<A3>                    aA3 = new MyStack<>();  // creates an object of MyStack which accepts the element of A3 type.
+        MyStack<A4>                    aA4 = new MyStack<>();  // creates an object of MyStack which accepts the element of A4 type.
+
+
+        // m1(...);
+        // m2(...);
+        // m3(...);
+
+
+        // Valid method calls of m1():
+     m1(aA3);  // as m1() only accepts arguments of type A3 or its subclasses. A3 is not subclassed by anyone.
+
+
+        // Valid calls of m2():
+        m2(aA1);  // as m2() only accepts arguments of any type.
+        m2(aA2);
+        m2(aA3);
+        m2(aA4);
+
+
+        // Valid calls of m3():
+        m2(aA3);  // as m1() only accepts arguments of type A3 or its superclasses. A3 is not subclassed by anyone.
+        m2(aA2);
+        m2(aA1);
+
+
+
+
+        aVector.add( aMyStack );  // adds the element to aVector as it is of type MyStack<Integer>
+        bVector.add( bMyStack );  // adds the element to bVector as it is of type MyStack<MyStack<Integer>>
+    }
+    public static void main(String args[] )        {
+    }
+}

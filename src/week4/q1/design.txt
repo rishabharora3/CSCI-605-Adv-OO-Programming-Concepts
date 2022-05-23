@@ -1,0 +1,18 @@
+Classes:
+
+1. Picture.class
+
+-- Using this class to show the images to the user and all the manipulations required on the image using a
+vector. An instance has been created in the Player class to associate each image to each player.
+
+2. Player.class
+
+-- Using the player class to create two instances for the game and associating all the fields related to it.
+
+3. Words.class
+
+-- using this class to read the description of the images from a file
+
+4.  Game.class
+
+-- using the class to play the game between two players. Contains the main() function.

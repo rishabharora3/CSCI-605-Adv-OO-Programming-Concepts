@@ -1,0 +1,10 @@
+To run password modification:
+
+Start with compiling and running PasswordWrite.java with argument file name 1234.ser
+This creates a file and asks for pass word and then stores the password  in the file along with the code for the string
+Now, we can test by running PasswordRead.java and passing the file name(1234.ser)
+if the password is changed, it will show a prompt that password has been changed.
+
+We can modify password by using ModifyPassword file and passing as argument, the new password which we want to update.
+
+This file reads the password from the given user input filename 1234.ser and updates the new password and writes into the file.

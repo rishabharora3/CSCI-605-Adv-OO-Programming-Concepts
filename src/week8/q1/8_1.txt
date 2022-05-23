@@ -1,0 +1,83 @@
+ASSIGNMENT 8.1
+
+There is a main class Interference which has a parameterized class Thing<T>. It has a set(T a type) method and some other methods. This parameterized class is inherited by another parameterized class ThingThing<T>. It has a overridden method set(T a type).
+Now our Outer class named Interference has 2 static generic methods and a main method. 
+
+Things happening at compile time:
+  — Type erasure happens for all the parameterized types.
+      — Inner class “Thing” will look like this after type erasure:
+           public static class Thing{
+ 
+	       private Object aType; 
+ 
+	       public void set(Object aType) {
+		   this.aType = aType;
+	       }
+ 
+	       public Object get() {
+		   return aType;
+	       }
+           }
+
+     — Inner class “ThingThing” will look like this after type erasure:
+          public static class ThingThing extends Thing {
+	      public void set(Object aType) {
+		  super.set(aType);
+	      }
+          }
+
+      — Static method “insertThing”  will look like the following code after type erasure:
+           public static void insertThing(Object u, List things) {
+	       Thing thing = new Thing();
+	       thing.set(u);
+	       things.add(thing);
+           }
+	— Static method “outputThings”  will look like the following code after type erasure:
+          public static  void outputThinges(java.util.List things) {
+	      int counter = 0;
+	      for (Thing thing: things) {
+	      U thingContents = thing.get();
+	      System.out.println("Thing #" + counter + " = " + thingContents.toString());
+	      counter++;
+	      }
+  }
+
+
+
+Line by Line execution of main () method of Interference class(Runtime Execution).
+— ArrayList<Thing<Integer>> listOfIntegerThinges = new ArrayList<>();
+    — This line creates an object of ArrayList which is of type Thing<Integer>, which essentially means that ListOfIntegerThinges will only accept the elements of Thing<Integer> type. Any other type of element will cause compile time error. 
+
+—  Interference.<Integer>insertThing(Integer.valueOf(10), listOfIntegerThinges) //here generic method is    called with type witness.
+   — The above line calls the parameterized static method of Interference class and hence the syntax. The first parameter passed is Integer.valueOf(10), which converts string “10” to Integer 10.
+   — The second parameter is the arraylist object we created.
+   — The above line calls the static method of Interference class with first parameter as Integer of value 10 and an arraylist of type Thing<Integer>.
+   — Method execution of insertThing —
+        It creates an object of class Thing and then calls the set function of class Thing which essentially sets the value of instance variable aType.
+    — The last line of insertThing adds the object to the list object of things.
+
+— The next two lines of code does exactly the same things for different arguments. However, we omit the   type witness here as java compiler has the ability to infer the type of parameter. Hence, we donot need  type witness.
+— Hence, we have 3 elements in our listOfOurIntegerThings.
+
+— Interference.outputThinges(listOfIntegerThinges);
+     — The above line calls the OutputThings method which accepts the List object.
+     — For loop in the method iterates through the list 
+        — Object thingContents = thing.get() : It calls the get() method of inner class Thing
+             which returns the instance variable.
+        — Then it displays the returned value after converting it to string.
+        — The last line of the method increases the counter.
+
+            —Hence, we get the following output:
+                Thing #0 = 10
+                Thing #1 = 20
+                Thing #2 = 30
+				
+-- ArrayList<Thing<String>> listOfStrings = new ArrayList<>();  // This creates another Arraylist which accepts elements of <Things<String>>
+	Interference.<String>insertThing("b", listOfStrings); // This calls the insertThing functions with different parameter, which adds an objectThing<string> to listOfStrings 
+	Interference.<String>insertThing("a", listOfStrings); // This line exactly does the same thing as the above line.
+	
+	However, output isn't printed as in the case of "listOfIntegerThinges" because here "outputThings" is not called.
+	
+-- // Why does the following line not compile?
+	Interference.<String>insertThing(Integer.valueOf(30), listOfStrings); 
+      -- The above line throws the compile time error because the object listOfStrings can only accept the elements of Thing<String> type, and we are trying to enter elements of Thing<Integer> type. Hence, it throws an error.	
